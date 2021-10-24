@@ -1,15 +1,33 @@
 const express = require('express');
-const path = require('path');
 const randomId = require('random-id');
 const app = express(),
       bodyParser = require("body-parser");
-      port = 3080;
+      port = 3070;
 
 // place holder for the data
-const users = [];
+const users = [
+  {
+    id: "1",
+    firstName: "first1",
+    lastName: "last1",
+    email: "abc@gmail.com"
+  },
+  {
+    id: "2",
+    firstName: "first2",
+    lastName: "last2",
+    email: "abc@gmail.com"
+  },
+  {
+    id: "3",
+    firstName: "first3",
+    lastName: "last3",
+    email: "abc@gmail.com"
+  }
+];
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../my-app/dist')));
+app.use(express.static(process.cwd() + '/my-app/dist'));
 
 app.get('/api/users', (req, res) => {
   console.log('api/users called!!!!!!!')
@@ -25,7 +43,7 @@ app.post('/api/user', (req, res) => {
 });
 
 app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
+  res.sendFile(process.cwd() + '/my-app/dist/index.html');
 });
 
 app.listen(port, () => {

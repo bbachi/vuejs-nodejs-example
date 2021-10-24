@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Dashboard />
+    <Dashboard v-if="settings == true"/>
   </div>
 </template>
 
@@ -14,6 +14,18 @@ export default {
   name: 'App',
   components: {
     Dashboard
+  },
+  data() {
+      return {
+          settings: false
+      }
+  },
+  mounted() {
+    console.log("I am in mounted!!!")
+    this.settings = true
+  },
+  setup () {
+    console.log("I am in setup!!!")
   }
 }
 </script>
