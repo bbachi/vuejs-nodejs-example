@@ -22,7 +22,7 @@ import Header from './Header.vue'
 import CreateUser from './CreateUser.vue'
 import DisplayBoard from './DisplayBoard.vue'
 import Users from './Users.vue'
-import { getAllUsers, createUser } from '../services/UserService'
+import { getAllUsers, createUser, deleteUser } from '../services/UserService'
 
 export default {
   name: 'Dashboard',
@@ -46,12 +46,12 @@ export default {
         this.numberOfUsers = this.users.length
       })
     },
-    // deleteUser(){
-    //   deleteUser().then(response => {
-    //     console.log(response)
-    //     this.users.pop()
-    //   })
-    // },
+    deleteUser(){
+      deleteUser().then(response => {
+        console.log(response)
+        this.users.pop()
+      })
+    },
     userCreate(data) {
       console.log('data:::', data)
       createUser(data).then(response => {
