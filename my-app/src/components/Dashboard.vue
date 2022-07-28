@@ -4,7 +4,7 @@
     <div class="container mrgnbtm">
           <div class="row">
             <div class="col-md-8">
-                <CreateUser @createUser="userCreate($event)" />
+                <CreateUser @createUser="userCreate($event)" @deleteUser="deleteUser()"/>
             </div>
             <div class="col-md-4">
                 <DisplayBoard :numberOfUsers="numberOfUsers" @getAllUsers="getAllUsers()" />
@@ -46,6 +46,12 @@ export default {
         this.numberOfUsers = this.users.length
       })
     },
+    // deleteUser(){
+    //   deleteUser().then(response => {
+    //     console.log(response)
+    //     this.users.pop()
+    //   })
+    // },
     userCreate(data) {
       console.log('data:::', data)
       createUser(data).then(response => {

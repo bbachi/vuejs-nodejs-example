@@ -21,6 +21,7 @@
                     </div>
                 </div>
                 <button type="button" @click='createUser()' class="btn btn-danger">Create</button>
+                <button type="button" @click='deleteUser()' class="btn btn-warning ml-3">Delete</button>
             </form>
         </div>
     </div>
@@ -52,6 +53,9 @@ export default {
           this.firstName = "";
           this.lastName = "";
           this.email = "";
+      },
+      deleteUser(){
+        this.$emit('deleteUser')
       }
   }
 }
