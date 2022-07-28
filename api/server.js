@@ -3,7 +3,7 @@ const randomId = require('random-id');
 const app = express(),
       bodyParser = require("body-parser");
       port = 3070;
-
+let count=0;
 // place holder for the data
 const users = [
   {
@@ -35,12 +35,28 @@ app.get('/api/users', (req, res) => {
 });
 
 app.post('/api/user', (req, res) => {
+  // if(count<10){                                                   // limiting number of users to the server
   const user = req.body.user;
-  user.id = randomId(10);
+  console.log(req.body);
   console.log('Adding user:::::', user);
   users.push(user);
   res.json("user addedd");
+  count+=1;
+  
+// }else{
+//   console.log("Maximum number of accounts created!!")
+// }
 });
+
+app.delete('/api/users',(req,res)=>{
+  if(users.length==0){
+    res.json("User list is empty, no more deletions possible!")
+  }
+  else{
+  users.pop()
+  res.json("user deleted")
+  }
+})
 
 app.get('/', (req,res) => {
   res.sendFile(process.cwd() + '/my-app/dist/index.html');
