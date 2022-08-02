@@ -4,7 +4,7 @@
     <div class="container mrgnbtm">
           <div class="row">
             <div class="col-md-8">
-                <CreateUser @createUser="userCreate($event)" />
+                <CreateUser @createUser="userCreate($event)" @deleteUser="deleteUser()"/>
             </div>
             <div class="col-md-4">
                 <DisplayBoard :numberOfUsers="numberOfUsers" @getAllUsers="getAllUsers()" />
@@ -22,7 +22,7 @@ import Header from './Header.vue'
 import CreateUser from './CreateUser.vue'
 import DisplayBoard from './DisplayBoard.vue'
 import Users from './Users.vue'
-import { getAllUsers, createUser } from '../services/UserService'
+import { getAllUsers, createUser, deleteUser } from '../services/UserService'
 
 export default {
   name: 'Dashboard',
@@ -44,6 +44,12 @@ export default {
         console.log(response)
         this.users = response
         this.numberOfUsers = this.users.length
+      })
+    },
+    deleteUser(){
+      deleteUser().then(response => {
+        console.log(response)
+        this.users.pop()
       })
     },
     userCreate(data) {
