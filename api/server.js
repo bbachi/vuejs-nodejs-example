@@ -4,6 +4,7 @@ const app = express(),
       bodyParser = require("body-parser");
       port = 3070;
 let count=0;
+let noofusers=0;
 // place holder for the data
 const users = [
   {
@@ -35,17 +36,20 @@ app.get('/api/users', (req, res) => {
 });
 
 app.post('/api/user', (req, res) => {
-  // if(count<10){                                                   // limiting number of users to the server
-  const user = req.body.user;
-  console.log(req.body);
-  console.log('Adding user:::::', user);
-  users.push(user);
-  res.json("user addedd");
   count+=1;
-  
-// }else{
-//   console.log("Maximum number of accounts created!!")
-// }
+  if(count<10){                                                   // limiting number of users to the server
+    noofusers=count;
+    const user = req.body.user;
+    console.log(req.body);
+    console.log('Adding user:::::', user);
+    console.log(`Number of users in the database =${noofusers}`)
+    users.push(user);
+    res.json("user addedd");
+}else{
+  console.log(`Maximum number of users in the database \n Number of users in the database =${noofusers}`)
+  res.status=200;
+  res.json(`Maximum number of users in the database \n Number of users in the database =${noofusers}`)
+}
 });
 
 app.delete('/api/users',(req,res)=>{
